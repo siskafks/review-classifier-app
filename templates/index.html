@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fake Review Classifier</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Fake Review Classifier</h1>
+            <nav>
+                <ul>
+                    <li><a href="/" class="active">Klasifikasi</a></li>
+                    <li><a href="/train">Pelatihan</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="content">
+            <form method="post" action="/predict">
+                <div class="form-input">
+                    <div class="input">
+                        <label for="helpful">Review Helpful</label>
+                        <input type="number" id="helpful" name="helpful" min="0" value="{{helpful}}" required>
+                    </div>
+                    <div class="input">
+                        <label for="sentiment">Sentiment</label>
+                        <input type="number" step="0.000001" id="sentiment" name="sentiment" min="-1" max="1" value="{{sentiment}}" required>
+                    </div>
+                    <div class="input">
+                        <label for="subjectivity">Subjectivity</label>
+                        <input type="number" step="0.000001" id="subjectivity" name="subjectivity" min="0" max="1" value="{{subjectivity}}" required>
+                    </div>
+                    <div class="input">
+                        <label for="words">Word Count</label>
+                        <input type="number" id="words" name="words" min="0" value="{{words}}" required>
+                    </div>
+                    <div class="input">
+                        <label for="noun">Noun Count</label>
+                        <input type="number" id="noun" name="noun" min="0" value="{{noun}}" required>
+                    </div>
+                    <div class="input">
+                        <label for="adj">Adjective Count</label>
+                        <input type="number" id="adj" name="adj" min="0" value="{{adj}}" required>
+                    </div>
+                    <div class="input">
+                        <label for="verb">Verb Count</label>
+                        <input type="number" id="verb" name="verb" min="0" value="{{verb}}" required>
+                    </div>
+                    <div class="input">
+                        <label for="adv">Adverb Count</label>
+                        <input type="number" id="adv" name="adv" min="0" value="{{adv}}" required>
+                    </div>
+                    <div class="input">
+                        <label for="authentic">Authenticity</label>
+                        <input type="number" step="0.000001" id="authentic" name="authentic" min="0" value="{{authentic}}" required>
+                    </div>
+                    <div class="input">
+                        <label for="at">Analytical Thinking</label>
+                        <input type="number" id="at" name="at" min="0" value="{{at}}" required>
+                    </div>
+                    <div class="action">
+                        <button>Check</button>
+                        <a href="/">Reset</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="result">
+            {% if predictions == 1 %}
+                <h2 style="color: red">FAKE</h2>
+            {% elif predictions == -1 %}
+                <h2 style="color: green">NOT FAKE</h2>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
